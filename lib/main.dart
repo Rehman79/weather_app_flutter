@@ -7,7 +7,7 @@ import 'package:weather_app_flutter/views/registration_page.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: login(),
+    home: register(),
     routes: {
       '/initial':(context)=>initial(),
       '/login': (context) => login(),
