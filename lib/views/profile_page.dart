@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-class homepage extends StatelessWidget {
-  const homepage({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
