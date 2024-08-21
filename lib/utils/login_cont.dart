@@ -32,6 +32,7 @@ class LoginCont extends StatelessWidget {
             content: subcontent,
             color: Colors.white,
             logText: true,
+            fontSize: 18,
           ),
         ],
       ),
