@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app_flutter/services/auth_services.dart';
 import 'package:weather_app_flutter/utils/bg_cont.dart';
 import 'package:weather_app_flutter/utils/custom_text.dart';
 import 'package:weather_app_flutter/utils/custom_text_field.dart';
@@ -8,45 +9,44 @@ import 'package:weather_app_flutter/utils/reuse_log_button.dart';
 import 'package:weather_app_flutter/views/registration_page.dart';
 
 class login extends StatelessWidget {
-  login({super.key});
-
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final AuthServices _authServices = AuthServices();
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    double width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: BgCont(
         child: Column(
           children: [
             LoginCont(
-                maincontent: 'Welcome', subcontent: 'Sign in to continue'),
-            SizedBox(height: height * 0.01),
+              maincontent: 'Welcome',
+              subcontent: 'Sign in to continue',
+            ),
+            SizedBox(height: height * 0.02), // Adjusted from 0.01 to 0.02 for more spacing
             Container(
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10))
+                color: Theme.of(context).colorScheme.background,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(width * 0.05), // Responsive border radius
+                  topRight: Radius.circular(width * 0.05), // Responsive border radius
+                ),
               ),
-              height: height * 0.74,
+              height: height * 0.75, // Adjusted from 0.74 to 0.75 for better fitting
               width: width,
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0, vertical: 30),
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.05, // Responsive horizontal padding
+                  vertical: height * 0.04, // Responsive vertical padding
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     CustomTextField(
-                      prefixIcon: Icon(Icons.mail_outline, color: Colors.blue),
+                      prefixIcon: Icon(Icons.mail_outline, color: Theme.of(context).colorScheme.primary),
                       controller: emailController,
                       labelText: 'Email',
                       keyboardType: TextInputType.emailAddress,
@@ -54,9 +54,9 @@ class login extends StatelessWidget {
                       hintText: 'Enter your email address',
                       obscureText: false,
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: height * 0.02), // Responsive spacing
                     CustomTextField(
-                      prefixIcon: Icon(Icons.key, color: Colors.blue),
+                      prefixIcon: Icon(Icons.key, color: Theme.of(context).colorScheme.primary),
                       controller: passwordController,
                       labelText: 'Password',
                       keyboardType: TextInputType.text,
@@ -64,60 +64,78 @@ class login extends StatelessWidget {
                       hintText: 'Enter your password',
                       obscureText: true,
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: height * 0.03), // Responsive spacing
                     GestureDetector(
                       onTap: () {},
                       child: CustomText(
-                        content: 'Forgot Password?', fontSize: 16,),
+                        content: 'Forgot Password?',
+                        fontSize: width * 0.04, // Responsive font size
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
                     ),
-                    SizedBox(height: 20),
-                    ReuseLogButton(content: 'Login',
-                      onTap: () {},
-                      color: Colors.blue,
-                      textcolor: Colors.white,
-                      fontSize: 25, icon_chk: false,),
-                    SizedBox(height: 30),
+                    SizedBox(height: height * 0.03), // Responsive spacing
+                    ReuseLogButton(
+                      content: 'Login',
+                      onTap: () => _authServices.loginUser(context, emailController, passwordController),
+                      color: Theme.of(context).colorScheme.primary,
+                      textcolor: Theme.of(context).colorScheme.onPrimary,
+                      fontSize: width * 0.06, // Responsive font size
+                      icon_chk: false,
+                    ),
+                    SizedBox(height: height * 0.04), // Responsive spacing
                     Row(
                       children: <Widget>[
                         Expanded(
-                          child: Divider(
-                            color: Colors.grey,
-                            thickness: 1.0,
-                          ),
+                          child: Divider(color: Colors.grey, thickness: 1.0),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child:CustomText(content: 'Or Login with',fontSize: 14,color: Colors.black,),
-                        ),
-                        Expanded(
-                          child: Divider(
-                            color: Colors.grey,
-                            thickness: 1.0,
+                          padding: EdgeInsets.symmetric(horizontal: width * 0.02), // Responsive padding
+                          child: CustomText(
+                            content: 'Or Login with',
+                            fontSize: width * 0.035, // Responsive font size
+                            color: Theme.of(context).colorScheme.onBackground,
                           ),
                         ),
+                        Expanded(
+                          child: Divider(color: Colors.grey, thickness: 1.0),
+                        ),
                       ],
                     ),
-                    SizedBox(height: 30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ReuseLogButton(content: 'Google', onTap: (){},widthFactor: 0.43,heightFactor: 0.06, icon_chk: true,imgpath: 'lib/Assets/images/Google.png'),
-                        ReuseLogButton(content: 'Facebook', onTap: (){},widthFactor: 0.43,heightFactor: 0.06,icon_chk: true,imgpath: 'lib/Assets/images/facebook.png',),
-                      ],
-                    ),
-                    SizedBox(height: 30),
+                    SizedBox(height: height * 0.04), // Responsive spacing
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CustomText(content: "Don't have an account? ",fontSize: 16,color: Colors.grey,),
-                        GestureDetector(
-                          onTap: (){
-                            FadeNavigation.navigate(context, register());
+                        ReuseLogButton(
+                          content: 'Google',
+                          onTap: () {
+                            _authServices.loginWithGoogle(context);
                           },
-                          child: CustomText(content: 'Register',fontSize: 16,),
+                          widthFactor: 0.8,
+                          heightFactor: 0.06,
+                          icon_chk: true,
+                          imgpath: 'lib/Assets/images/Google.png',
                         ),
                       ],
-                    )
+                    ),
+                    SizedBox(height: height * 0.04), // Responsive spacing
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomText(
+                          content: "Don't have an account? ",
+                          fontSize: width * 0.04, // Responsive font size
+                          color: Colors.grey,
+                        ),
+                        GestureDetector(
+                          onTap: () => FadeNavigation.navigate(context, register()),
+                          child: CustomText(
+                            content: 'Register',
+                            fontSize: width * 0.04, // Responsive font size
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),

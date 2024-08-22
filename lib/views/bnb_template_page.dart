@@ -26,7 +26,7 @@ class _BnbTemplatePageState extends State<BnbTemplatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_page], // Display the current screen based on the selected index
+      body: _screens[_page],
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         index: 0,

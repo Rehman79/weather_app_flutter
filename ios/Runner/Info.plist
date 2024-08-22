@@ -11,6 +11,8 @@
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>We need your location to provide weather updates for your area.</string>
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>weather_app_flutter</string>
