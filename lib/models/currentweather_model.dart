@@ -1,5 +1,3 @@
-import 'Currentweather_model.dart';
-
 class CurrentWeather {
   final double temperature;
   final double feelsLike;
@@ -10,6 +8,8 @@ class CurrentWeather {
   final double windSpeed;
   final int windDeg;
   final WeatherCondition weather;
+  final String country;
+  final String name;
 
   CurrentWeather({
     required this.temperature,
@@ -21,6 +21,8 @@ class CurrentWeather {
     required this.windSpeed,
     required this.windDeg,
     required this.weather,
+    required this.country,
+    required this.name,
   });
 
   factory CurrentWeather.fromJson(Map<String, dynamic> json) {
@@ -33,10 +35,13 @@ class CurrentWeather {
       visibility: json['visibility'].toDouble(),
       windSpeed: json['wind']['speed'].toDouble(),
       windDeg: json['wind']['deg'],
+      country: json['sys']['country'],
+      name: json['name'],
       weather: WeatherCondition.fromJson(json['weather'][0]),
     );
   }
 }
+
 class WeatherCondition {
   final int id;
   final String main;

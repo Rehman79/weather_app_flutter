@@ -14,12 +14,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  LocationService locationservice=LocationService();
+  LocationService locationService = LocationService();
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<WeatherViewModel>(context, listen: false).fetchWeatherForCurrentLocation();
+      Provider.of<WeatherViewModel>(context, listen: false)
+          .fetchWeatherForCurrentLocation();
     });
   }
 
@@ -57,15 +59,14 @@ class _HomePageState extends State<HomePage> {
                               CustomText(content: 'C', fontSize: 30),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                     Row(
                       children: [
-                        Icon(Icons.location_pin, color: Colors.blue),
                         SizedBox(width: 8),
                         CustomText(
-                          content: '${locationservice.getLocationName()}',
+                          content: 'Wind Speed:${weatherViewModel.weather!.currentWeather.windSpeed}',
                           fontWeight: FontWeight.w700,
                           fontSize: 20,
                         ),
