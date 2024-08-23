@@ -20,8 +20,11 @@ void main() async {
             ChangeNotifierProvider(create: (context) => WeatherViewModel()),
           ],
           child: MaterialApp(
+            theme: ThemeData(
+              primaryColor: Colors.blue,
+            ),
             debugShowCheckedModeBanner: false,
-            home: login(),
+            home: Initial(),
             routes: {
               '/initial': (context) => Initial(),
               '/login': (context) => login(),

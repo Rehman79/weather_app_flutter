@@ -1,13 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app_flutter/services/user_service.dart';
 import 'package:weather_app_flutter/utils/bg_cont.dart';
 import 'package:weather_app_flutter/utils/custom_text.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+import '../services/auth_services.dart';
 
+class ProfilePage extends StatelessWidget {
+  ProfilePage({super.key});
+  final AuthServices _authServices = AuthServices();
+  final UserService _userService=UserService();
   @override
   Widget build(BuildContext context) {
+
     double height=MediaQuery.of(context).size.height;
     double width=MediaQuery.of(context).size.width;
     return Scaffold(
@@ -45,16 +50,16 @@ class ProfilePage extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      CustomText(content: 'Name'),
+                      CustomText(content: '${_userService.getUserName()}'),
                       SizedBox(height: height*0.1,),
-                      CustomText(content: 'Email'),
+                      CustomText(content: '${_userService.getUserEmail()}',fontSize: 20,),
                     ],
                   ),
                 ),
             SizedBox(height: height*0.02,),
             ElevatedButton(
               onPressed: () {
-
+                _authServices.signOut();
               },
               child: Text('Logout'),
               style: ElevatedButton.styleFrom(

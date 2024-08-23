@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:weather_app_flutter/views/profile_page.dart';
 
 import 'home_page.dart';
-import 'location_page.dart';
-import 'notifications_page.dart';
 
 class BnbTemplatePage extends StatefulWidget {
   @override
@@ -18,8 +16,6 @@ class _BnbTemplatePageState extends State<BnbTemplatePage> {
 
   final List<Widget> _screens = [
     HomePage(),
-    LocationPage(),
-    NotificationsPage(),
     ProfilePage(),
   ];
 
@@ -32,8 +28,6 @@ class _BnbTemplatePageState extends State<BnbTemplatePage> {
         index: 0,
         items: <Widget>[
           Icon(Icons.home_outlined, size: 30,color: Colors.white,),
-          Icon(Icons.location_on_outlined, size: 30,color: Colors.white,),
-          Icon(Icons.notifications_none_outlined, size: 30,color: Colors.white,),
           Icon(Icons.person_outline, size: 30,color: Colors.white,),
         ],
         color: Colors.blue,

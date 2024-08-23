@@ -25,83 +25,96 @@ class register extends StatelessWidget {
         child: Column(
           children: [
             LoginCont(maincontent: 'Join Us', subcontent: 'Create a new account'),
-            SizedBox(height: height * 0.01),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
+            SizedBox(height: height * 0.02), // Adjusted for better spacing
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.background,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(width * 0.05), // Responsive border radius
+                    topRight: Radius.circular(width * 0.05), // Responsive border radius
+                  ),
                 ),
-              ),
-              height: height * 0.74,
-              width: width,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomTextField(
-                      prefixIcon: Icon(Icons.person, color: Colors.blue),
-                      controller: nameController,
-                      labelText: 'Name',
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.next,
-                      hintText: 'Enter your Full name',
-                      obscureText: false,
-                    ),
-                    SizedBox(height: 15),
-                    CustomTextField(
-                      prefixIcon: Icon(Icons.mail_outline, color: Colors.blue),
-                      controller: emailController,
-                      labelText: 'Email',
-                      keyboardType: TextInputType.emailAddress,
-                      textInputAction: TextInputAction.next,
-                      hintText: 'Enter your email address',
-                      obscureText: false,
-                    ),
-                    SizedBox(height: 15),
-                    CustomTextField(
-                      prefixIcon: Icon(Icons.key, color: Colors.blue),
-                      controller: passwordController,
-                      labelText: 'Password',
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.next,
-                      hintText: 'Enter your password',
-                      obscureText: true,
-                    ),
-                    SizedBox(height: 15),
-                    CustomTextField(
-                      prefixIcon: Icon(Icons.key, color: Colors.blue),
-                      controller: confrmpasswordController,
-                      labelText: 'Confirm Password',
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.done,
-                      hintText: 'Confirm your password',
-                      obscureText: true,
-                    ),
-                    SizedBox(height: 20),
-                    ReuseLogButton(
-                      content: 'Sign up',
-                      onTap: () => _authServices.registerUser(
-                          context, emailController, passwordController, confrmpasswordController),
-                      color: Colors.blue,
-                      textcolor: Colors.white,
-                      fontSize: 25,
-                      icon_chk: false,
-                    ),
-                    SizedBox(height: 30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomText(content: "Already have an account? ", fontSize: 16, color: Colors.grey),
-                        GestureDetector(
-                          onTap: () => FadeNavigation.navigate(context, login()),
-                          child: CustomText(content: 'Login', fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ],
+                height: height * 0.75, // Adjusted for better fitting
+                width: width,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.05, // Responsive horizontal padding
+                    vertical: height * 0.04, // Responsive vertical padding
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomTextField(
+                        prefixIcon: Icon(Icons.person, color: Theme.of(context).colorScheme.primary),
+                        controller: nameController,
+                        labelText: 'Name',
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        hintText: 'Enter your full name',
+                        obscureText: false,
+                      ),
+                      SizedBox(height: height * 0.02), // Responsive spacing
+                      CustomTextField(
+                        prefixIcon: Icon(Icons.mail_outline, color: Theme.of(context).colorScheme.primary),
+                        controller: emailController,
+                        labelText: 'Email',
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                        hintText: 'Enter your email address',
+                        obscureText: false,
+                      ),
+                      SizedBox(height: height * 0.02), // Responsive spacing
+                      CustomTextField(
+                        prefixIcon: Icon(Icons.key, color: Theme.of(context).colorScheme.primary),
+                        controller: passwordController,
+                        labelText: 'Password',
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        hintText: 'Enter your password',
+                        obscureText: true,
+                      ),
+                      SizedBox(height: height * 0.02), // Responsive spacing
+                      CustomTextField(
+                        prefixIcon: Icon(Icons.key, color: Theme.of(context).colorScheme.primary),
+                        controller: confrmpasswordController,
+                        labelText: 'Confirm Password',
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.done,
+                        hintText: 'Confirm your password',
+                        obscureText: true,
+                      ),
+                      SizedBox(height: height * 0.03), // Responsive spacing
+                      ReuseLogButton(
+                        content: 'Sign Up',
+                        onTap: () => _authServices.registerUser(
+                            context, emailController, passwordController, confrmpasswordController),
+                        color: Theme.of(context).colorScheme.primary,
+                        textcolor: Theme.of(context).colorScheme.onPrimary,
+                        fontSize: width * 0.06, // Responsive font size
+                        icon_chk: false,
+                      ),
+                      SizedBox(height: height * 0.04), // Responsive spacing
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomText(
+                            content: "Already have an account? ",
+                            fontSize: width * 0.04, // Responsive font size
+                            color: Colors.grey,
+                          ),
+                          GestureDetector(
+                            onTap: () => FadeNavigation.navigate(context, login()),
+                            child: CustomText(
+                              content: 'Login',
+                              fontSize: width * 0.04, // Responsive font size
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

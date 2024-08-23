@@ -19,14 +19,15 @@ class _InitialState extends State<Initial> {
   @override
   void initState() {
     super.initState();
-    _checkUser();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _checkUser();
+    });
   }
 
   Future<void> _checkUser() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      Navigator.pushReplacement(
-        context,
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => BnbTemplatePage()),
       );
     }
@@ -103,20 +104,7 @@ class _InitialState extends State<Initial> {
                   CustomButton(
                     reg: true,
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (context, animation, secondaryAnimation) => register(),
-                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                            const begin = Offset(0.0, 1.0);
-                            const end = Offset.zero;
-                            const curve = Curves.easeInOut;
-                            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                            var offsetAnimation = animation.drive(tween);
-                            return SlideTransition(position: offsetAnimation, child: child);
-                          },
-                        ),
-                      );
+                      FadeNavigation.navigate(context, register());
                     },
                     heightFactor: 0.07,
                     widthFactor: 0.57,

@@ -1,17 +1,14 @@
+import 'Currentweather_model.dart';
+
 class CurrentWeather {
   final double temperature;
   final double feelsLike;
   final double pressure;
   final int humidity;
-  final double dewPoint;
   final int clouds;
-  final double uvi;
   final double visibility;
   final double windSpeed;
-  final double? windGust;
   final int windDeg;
-  final double? rain;
-  final double? snow;
   final WeatherCondition weather;
 
   CurrentWeather({
@@ -19,38 +16,27 @@ class CurrentWeather {
     required this.feelsLike,
     required this.pressure,
     required this.humidity,
-    required this.dewPoint,
     required this.clouds,
-    required this.uvi,
     required this.visibility,
     required this.windSpeed,
-    this.windGust,
     required this.windDeg,
-    this.rain,
-    this.snow,
     required this.weather,
   });
 
   factory CurrentWeather.fromJson(Map<String, dynamic> json) {
     return CurrentWeather(
-      temperature: json['temp'].toDouble(),
-      feelsLike: json['feels_like'].toDouble(),
-      pressure: json['pressure'].toDouble(),
-      humidity: json['humidity'],
-      dewPoint: json['dew_point'].toDouble(),
-      clouds: json['clouds'],
-      uvi: json['uvi'].toDouble(),
+      temperature: json['main']['temp'].toDouble(),
+      feelsLike: json['main']['feels_like'].toDouble(),
+      pressure: json['main']['pressure'].toDouble(),
+      humidity: json['main']['humidity'],
+      clouds: json['clouds']['all'],
       visibility: json['visibility'].toDouble(),
-      windSpeed: json['wind_speed'].toDouble(),
-      windGust: json['wind_gust']?.toDouble(),
-      windDeg: json['wind_deg'],
-      rain: json['rain']?['1h']?.toDouble(),
-      snow: json['snow']?['1h']?.toDouble(),
+      windSpeed: json['wind']['speed'].toDouble(),
+      windDeg: json['wind']['deg'],
       weather: WeatherCondition.fromJson(json['weather'][0]),
     );
   }
 }
-
 class WeatherCondition {
   final int id;
   final String main;
@@ -71,5 +57,20 @@ class WeatherCondition {
       description: json['description'],
       icon: json['icon'],
     );
+  }
+
+  String getImageAsset() {
+    switch (main.toLowerCase()) {
+      case 'clear':
+        return 'lib/Assets/images/sun.png';
+      case 'clouds':
+        return 'lib/Assets/images/clouds.png';
+      case 'rain':
+        return 'lib/Assets/images/rainy.png';
+      case 'snow':
+        return 'lib/Assets/images/clouds-snow.png';
+      default:
+        return 'lib/Assets/images/sun-clouds-rain.png';
+    }
   }
 }

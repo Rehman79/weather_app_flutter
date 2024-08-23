@@ -101,4 +101,36 @@ class AuthServices {
       );
     }
   }
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+    } catch (e) {
+      print("Error signing out: $e");
+      throw Exception("Failed to sign out");
+    }
+  }
+  Future<void> resetPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      print("Password reset email sent to $email");
+    } catch (e) {
+      print("Error sending password reset email: $e");
+      throw Exception("Failed to send password reset email");
+    }
+  }
+  Future<bool> verifyEmail(String email) async {
+    try {
+      List<String> signInMethods = await _auth.fetchSignInMethodsForEmail(email);
+      if (signInMethods.isNotEmpty) {
+        // Email exists
+        return true;
+      } else {
+        // Email does not exist
+        return false;
+      }
+    } catch (e) {
+      print("Error verifying email: $e");
+      throw Exception("Failed to verify email");
+    }
+  }
 }
