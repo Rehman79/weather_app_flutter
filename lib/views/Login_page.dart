@@ -26,14 +26,14 @@ class login extends StatelessWidget {
               maincontent: 'Welcome',
               subcontent: 'Sign in to continue',
             ),
-            SizedBox(height: height * 0.02), // Adjusted from 0.01 to 0.02 for more spacing
+            SizedBox(height: height * 0.02),
             SingleChildScrollView(
               child: Expanded(
                 child: Container(
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.background,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(width * 0.05), // Responsive border radius
+                      topLeft: Radius.circular(width * 0.05),
                       topRight: Radius.circular(width * 0.05), // Responsive border radius
                     ),
                   ),

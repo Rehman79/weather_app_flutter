@@ -33,15 +33,15 @@ class register extends StatelessWidget {
                     color: Theme.of(context).colorScheme.background,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(width * 0.05), // Responsive border radius
-                      topRight: Radius.circular(width * 0.05), // Responsive border radius
+                      topRight: Radius.circular(width * 0.05),
                     ),
                   ),
-                  height: height * 0.75, // Adjusted for better fitting
+                  height: height * 0.75,
                   width: width,
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: width * 0.05, // Responsive horizontal padding
-                      vertical: height * 0.04, // Responsive vertical padding
+                      vertical: height * 0.04,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
