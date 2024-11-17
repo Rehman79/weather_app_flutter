@@ -3,7 +3,7 @@ import 'dart:convert';
 import '../models/weatherresponce_model.dart';
 
 class WeatherService {
-  final String apiKey = '5606bf9f2fda581f4aeb9127524ec4c7';
+  final String apiKey = 'your_key';
 
   Future<WeatherResponse> fetchWeather(double latitude, double longitude) async {
     final url = "https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric";
